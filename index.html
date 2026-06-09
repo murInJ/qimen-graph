@@ -1,8 +1,56 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>qimen-graph 奇门节点图排盘</title>
-<style>
-:root{--bg:#0f172a;--panel:#111827;--card:#1f2937;--line:#334155;--text:#e5e7eb;--muted:#94a3b8;--gold:#fbbf24;--green:#34d399;--red:#fb7185;--blue:#60a5fa;--radius:18px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,s
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>奇门节点图排盘 qimen-graph</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <section class="hero-card">
+        <h1>奇门节点图排盘 <span>qimen-graph</span></h1>
+        <p class="subtitle">九宫卡片、关系边、状态修正、六维量化、完整盘面导出。结构参考 liuyao-graph / liuren-graph。</p>
+        <div class="badge-row">
+          <span class="badge gold">时家奇门</span><span class="badge blue">转盘法原型</span><span class="badge green">节点关系图</span><span class="badge">AI 导出</span>
+        </div>
+      </section>
+      <section class="hero-card hero-side">
+        <div class="small-note">当前局式</div>
+        <div class="big-number" id="heroJu">--</div>
+        <div class="small-note" id="heroExplain">请选择时间排盘。</div>
+      </section>
+    </header>
+
+    <main class="main">
+      <aside class="panel">
+        <h2>输入与导出</h2>
+        <div class="field"><label>占测时间</label><input id="dt" type="datetime-local" /></div>
+        <div class="btn-row"><button class="btn primary" id="setNowBtn">刷新为当前时间</button><button class="btn" id="renderBtn">重新排盘</button></div>
+        <div class="field"><label>起局方式</label><select id="castMode"><option value="hour">时家奇门：按问事当下时辰起局（推荐）</option><option disabled>日家/月家/年家：后续扩展</option></select></div>
+        <div class="field"><label>排法</label><select id="school"><option value="rotating">转盘法 / 排宫法（当前实现）</option><option disabled>飞盘法 / 阴盘：后续扩展</option></select></div>
+        <div class="field"><label>定局方式</label><select id="juMethod"><option value="sanyuan">节气三元（当前产品化近似）</option><option disabled>拆补 / 置闰：后续扩展</option></select></div>
+        <div class="field"><label>问题或主题（写入导出，不参与排盘）</label><textarea id="question" class="question" placeholder="例如：这次合作是否适合推进？"></textarea></div>
+        <div class="field"><label>取用模板</label><select id="topic"><option value="general">综合问事</option><option value="wealth">求财合作</option><option value="career">事业项目</option><option value="love">感情关系</option><option value="health">健康疾病</option><option value="travel">出行行动</option><option value="exam">考试文书</option></select></div>
+        <div class="btn-col"><button class="btn green" id="copyFullBtn">复制完整盘面给大模型</button><button class="btn" id="copyJsonBtn">复制 JSON 结构</button><button class="btn" id="downloadJsonBtn">下载 JSON</button></div>
+        <div class="hint-box"><b>说明：</b>具体问事最常用时家奇门。当前版本为静态原型，历法和排盘保留流派边界，适合先审查产品结构与关系拆解。</div>
+      </aside>
+
+      <section class="workspace"><div class="summary-grid" id="summary"></div><div class="board" id="board"></div></section>
+      <aside class="detail-card" id="detail"><h2>宫位详情</h2><div class="hint-box">点击任一九宫卡片查看详情。</div></aside>
+    </main>
+  </div>
+  <div class="toast" id="toast">已复制</div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/calendar.js"></script>
+  <script src="./js/relations.js"></script>
+  <script src="./js/qimen-core.js"></script>
+  <script src="./js/export.js"></script>
+  <script src="./js/render.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
